@@ -33,6 +33,8 @@ class dummy_options:
 # Functions to get XS/BR
 def getXS(_SM,_MHVar,_mh,_pm):
   _MHVar.setVal(_mh)
+#  print "issue: "
+  print "SM_XS_%s_%s"%(_pm,sqrts__)
   return _SM.modelBuilder.out.function("SM_XS_%s_%s"%(_pm,sqrts__)).getVal()
 def getBR(_SM,_MHVar,_mh,_dm):
   _MHVar.setVal(_mh)
@@ -44,6 +46,7 @@ def initialiseXSBR():
   DC = Datacard()
   MB = ModelBuilder(DC, options)
   physics = models.floatingHiggsMass
+  print options.physOpt
   physics.setPhysicsOptions(options.physOpt)
   MB.setPhysics(physics)
   MB.physics.doParametersOfInterest()
@@ -61,7 +64,8 @@ def initialiseXSBR():
   xsbr['constant'] = []
   mh = 120.
   while( mh < 130.05 ):
-    for pm in productionModes: xsbr[pm].append(getXS(SM,MHVar,mh,pm))
+    for pm in productionModes:
+      xsbr[pm].append(getXS(SM,MHVar,mh,pm))
     xsbr[decayMode].append(getBR(SM,MHVar,mh,decayMode))
     xsbr['constant'].append(1.)
     mh += 0.1
@@ -69,6 +73,7 @@ def initialiseXSBR():
   xsbr[decayMode] = np.asarray(xsbr[decayMode])
   xsbr['constant'] = np.asarray(xsbr['constant'])
   # If ggZH and ZH in production modes then make qqZH numpy array
+  xsbr['qqZH'] = xsbr['ZH']
   if('ggZH' in productionModes)&('ZH' in productionModes): xsbr['qqZH'] = xsbr['ZH']-xsbr['ggZH']
   return xsbr
 
@@ -139,6 +144,7 @@ class FinalModel:
     # XS
     fp = self.xsbrMap[self.proc]['factor'] if 'factor' in self.xsbrMap[self.proc] else 1.
     mp = self.xsbrMap[self.proc]['mode']
+    print self.XSBR
     xs = fp*self.XSBR[mp]
     self.Splines['xs'] = ROOT.RooSpline1D("fxs_%s_%s"%(self.proc,self.sqrts),"fxs_%s_%s"%(self.proc,self.sqrts),self.MH,len(mh),mh,xs)
     # BR
