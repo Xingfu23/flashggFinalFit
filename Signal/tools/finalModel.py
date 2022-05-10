@@ -33,8 +33,6 @@ class dummy_options:
 # Functions to get XS/BR
 def getXS(_SM,_MHVar,_mh,_pm):
   _MHVar.setVal(_mh)
-#  print "issue: "
-  print "SM_XS_%s_%s"%(_pm,sqrts__)
   return _SM.modelBuilder.out.function("SM_XS_%s_%s"%(_pm,sqrts__)).getVal()
 def getBR(_SM,_MHVar,_mh,_dm):
   _MHVar.setVal(_mh)
