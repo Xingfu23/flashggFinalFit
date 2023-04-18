@@ -16,13 +16,14 @@ globalReplacementMap['example']['catWV'] = "Untagged_Tag0"
 #  * if few events in diagonal process then may need to change the category aswell (see catRVMap)
 #  * map must contain entry for all cats being processed (for replacement proc and cat)
 globalReplacementMap['example']['procRVMap'] = od()
-globalReplacementMap["example"]["procRVMap"]["Untagged_Tag0"] = "GG2H"
-globalReplacementMap["example"]["procRVMap"]["VBF_Tag0"] = "VBF"
+# globalReplacementMap["example"]["procRVMap"]["Untagged_Tag0"] = "GG2H"
+# globalReplacementMap["example"]["procRVMap"]["VBF_Tag0"] = "VBF"
+globalReplacementMap["example"]["procRVMap"]["RECO_VH_MET_Tag0"] = "QQ2HLL_PTV_150_250_0J"
 # Replacement category for RV fit
 globalReplacementMap["example"]["catRVMap"] = od()
-globalReplacementMap["example"]["catRVMap"]["Untagged_Tag0"] = "Untagged_Tag0"
-globalReplacementMap["example"]["catRVMap"]["VBF_Tag0"] = "VBF_Tag0"
-
+#globalReplacementMap["example"]["catRVMap"]["Untagged_Tag0"] = "Untagged_Tag0"
+#globalReplacementMap["example"]["catRVMap"]["VBF_Tag0"] = "VBF_Tag0"
+globalReplacementMap["example"]["catRVMap"]["RECO_VH_MET_Tag0"] = "QQ2HLL_PTV_150_250_0J"
 
 # STXS analysis
 globalReplacementMap['STXS'] = od()
