@@ -36,7 +36,8 @@ ROOT.gStyle.SetOptStat(0)
 inputFiles = od()
 citr = 0
 if opt.cats in ['all','wall']:
-  fs = glob.glob("%s/outdir_%s/CMS-HGG_sigfit_%s_*.root"%(swd__,opt.ext,opt.ext))
+  # Please put input file into ./outdir_{ext}/signalFit/output/CMS-HGG_sigfit_{ext}_*.root
+  fs = glob.glob("%s/outdir_%s/signalFit/output/CMS-HGG_sigfit_%s_*.root"%(swd__,opt.ext,opt.ext))
   for f in fs:
     cat = re.sub(".root","",f.split("/")[-1].split("_%s_"%opt.ext)[-1])
     inputFiles[cat] = f
@@ -89,14 +90,17 @@ for cat,f in inputFiles.iteritems():
       for norm in rooiter(allNorms):
         proc = norm.GetName().split("%s_"%outputWSObjectTitle__)[-1].split("_%s"%year)[0]
         k  =  "%s__%s"%(proc,year)
-        _id = "%s_%s_%s_%s"%(proc,year,cat,sqrts__)
+        #_id = "%s_%s_%s_%s"%(proc,year,cat,sqrts__) 
+        _id = "%s_%s"%(cat,sqrts__)
+
         norms[k] = w.function("%s_%s_normThisLumi"%(outputWSObjectTitle__,_id))
     else:
       for proc in opt.procs.split(","):
         k = "%s__%s"%(proc,year)
-        _id = "%s_%s_%s_%s"%(proc,year,cat,sqrts__)
+        #_id = "%s_%s_%s_%s"%(proc,year,cat,sqrts__)
+        _id = "%s_%s"%(cat,sqrts__)
         norms[k] = w.function("%s_%s_normThisLumi"%(outputWSObjectTitle__,_id))
-    
+
   # Iterate over norms: extract total category norm
   catNorm = 0
   for k, norm in norms.iteritems():
@@ -107,7 +111,8 @@ for cat,f in inputFiles.iteritems():
   # Iterate over norms and extract data sets + pdfs
   for k, norm in norms.iteritems():
     proc, year = k.split("__")
-    _id = "%s_%s_%s_%s"%(proc,year,cat,sqrts__)
+    #_id = "%s_%s_%s_%s"%(proc,year,cat,sqrts__)
+    _id = "%s_%s"%(cat,sqrts__)
     w.var("IntLumi").setVal(lumiScaleFactor*lumiMap[year])
 
     # Prune
