@@ -74,7 +74,8 @@ for proc in opt.procs.split(","):
   f = ROOT.TFile(WSFileName,"read")
   inputWS = f.Get(inputWSName__)
   # print "===> In file ",WSFileName," look for roodataset = ","%s_%s_%s_%s"%(procToData(proc),opt.mass,sqrts__,opt.cat)
-  d = reduceDataset(inputWS.data("%s_%s_%s_%s"%(procToData(proc),opt.mass,sqrts__,opt.cat)),aset)
+  # d = reduceDataset(inputWS.data("%s_%s_%s_%s"%(procToData(proc),opt.mass,sqrts__,opt.cat)),aset)
+  d = reduceDataset(inputWS.data("%s_%s_%s_%s"%(procToData(proc.split("_")[0]),opt.mass,sqrts__,opt.cat)),aset)
   df.loc[len(df)] = [proc,d.sumEntries(),1,1]
   inputWS.Delete()
   f.Close()
@@ -91,7 +92,8 @@ for pidx, proc in enumerate(procsToFTest):
   WSFileName = glob.glob("%s/output*M%s*%s.root"%(opt.inputWSDir,opt.mass,proc))[0]
   f = ROOT.TFile(WSFileName,"read")
   inputWS = f.Get(inputWSName__)
-  d = reduceDataset(inputWS.data("%s_%s_%s_%s"%(procToData(proc),opt.mass,sqrts__,opt.cat)),aset)
+  # d = reduceDataset(inputWS.data("%s_%s_%s_%s"%(procToData(proc),opt.mass,sqrts__,opt.cat)),aset)
+  d = reduceDataset(inputWS.data("%s_%s_%s_%s"%(procToData(proc.split("_")[0]),opt.mass,sqrts__,opt.cat)),aset)
   datasets_RV[opt.mass] = splitRVWV(d,aset,mode="RV")
   datasets_WV[opt.mass] = splitRVWV(d,aset,mode="WV")
 
