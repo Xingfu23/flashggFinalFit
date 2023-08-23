@@ -49,16 +49,43 @@ if opt.cats in ['all','wall']:
       alist = ROOT.RooArgList(xvar)
     citr += 1
 else:
-  for cat in opt.cats.split(","):
-    f = "%s/outdir_%s/CMS-HGG_sigfit_%s_%s.root"%(swd__,opt.ext,opt.ext,cat)
-    inputFiles[cat] = f
-    if citr == 0:
-      w = ROOT.TFile(f).Get("wsig_13TeV")
-      xvar = w.var(opt.xvar.split(":")[0])
-      xvar.setPlotLabel(opt.xvar.split(":")[1])
-      xvar.setUnit(opt.xvar.split(":")[2])
-      alist = ROOT.RooArgList(xvar)
-    citr += 1
+  if 'allpt' in opt.cats:
+    _cat = opt.cats.replace('allpt_','')
+    fs = glob.glob("%s/outdir_%s/signalFit/output/CMS-HGG_sigfit_%s_*_%s.root"%(swd__,opt.ext,opt.ext, _cat)) 
+    for f in fs:
+      cat = re.sub(".root","",f.split("/")[-1].split("_%s_"%opt.ext)[-1])
+      print "cat = %s"%cat
+      print " --> Processing %s: file = %s"%(cat,f)
+      inputFiles[cat] = f
+      if citr == 0:
+        w = ROOT.TFile(f).Get("wsig_13TeV")
+        xvar = w.var(opt.xvar.split(":")[0])
+        xvar.setPlotLabel(opt.xvar.split(":")[1])
+        xvar.setUnit(opt.xvar.split(":")[2])
+        alist = ROOT.RooArgList(xvar)
+      citr += 1
+  else:
+    for cat in opt.cats.split(","):
+      f = "%s/outdir_%s/signalFit/output/CMS-HGG_sigfit_%s_%s.root"%(swd__,opt.ext,opt.ext,cat)
+      inputFiles[cat] = f
+      if citr == 0:
+        w = ROOT.TFile(f).Get("wsig_13TeV")
+        xvar = w.var(opt.xvar.split(":")[0])
+        xvar.setPlotLabel(opt.xvar.split(":")[1])
+        xvar.setUnit(opt.xvar.split(":")[2])
+        alist = ROOT.RooArgList(xvar)
+      citr += 1
+# else:
+#   for cat in opt.cats.split(","):
+#     f = "%s/outdir_%s/CMS-HGG_sigfit_%s_%s.root"%(swd__,opt.ext,opt.ext,cat)
+#     inputFiles[cat] = f
+#     if citr == 0:
+#       w = ROOT.TFile(f).Get("wsig_13TeV")
+#       xvar = w.var(opt.xvar.split(":")[0])
+#       xvar.setPlotLabel(opt.xvar.split(":")[1])
+#       xvar.setUnit(opt.xvar.split(":")[2])
+#       alist = ROOT.RooArgList(xvar)
+#     citr += 1
 
 # Load cat S/S+B weights
 if opt.loadCatWeights != '':
@@ -90,12 +117,14 @@ for cat,f in inputFiles.iteritems():
       for norm in rooiter(allNorms):
         proc = norm.GetName().split("%s_"%outputWSObjectTitle__)[-1].split("_%s"%year)[0]
         k  =  "%s__%s"%(proc,year)
-        _id = "%s_%s_%s_%s"%(proc,year,cat,sqrts__)
+        # _id = "%s_%s_%s_%s"%(proc,year,cat,sqrts__)
+        _id = "%s_%s"%(cat,sqrts__)
         norms[k] = w.function("%s_%s_normThisLumi"%(outputWSObjectTitle__,_id))
     else:
       for proc in opt.procs.split(","):
         k = "%s__%s"%(proc,year)
-        _id = "%s_%s_%s_%s"%(proc,year,cat,sqrts__)
+        # _id = "%s_%s_%s_%s"%(proc,year,cat,sqrts__)
+        _id = "%s_%s"%(cat,sqrts__)
         norms[k] = w.function("%s_%s_normThisLumi"%(outputWSObjectTitle__,_id))
 
 
@@ -109,7 +138,8 @@ for cat,f in inputFiles.iteritems():
   # Iterate over norms and extract data sets + pdfs
   for k, norm in norms.iteritems():
     proc, year = k.split("__")
-    _id = "%s_%s_%s_%s"%(proc,year,cat,sqrts__)
+    # _id = "%s_%s_%s_%s"%(proc,year,cat,sqrts__)
+    _id = "%s_%s"%(cat,sqrts__)
     w.var("IntLumi").setVal(lumiScaleFactor*lumiMap[year])
 
     # Prune
@@ -164,8 +194,5 @@ for cat,f in inputFiles.iteritems():
   fin.Close()
 
 # Make plot
-outdir="%s/%s/Plots"%(opt.outdir,opt.ext)
-if not os.path.isdir(outdir): os.system("mkdir -p %s"%outdir)
-if os.path.exists("/afs/cern.ch"): os.system("cp /afs/cern.ch/user/g/gpetrucc/php/index.php "+outdir)
-elif os.path.exists("/cmshome/dimarcoe"): os.system("cp /cmshome/dimarcoe/php/index.php "+outdir)
-plotSignalModel(hists,opt,_outdir=outdir)
+if not os.path.isdir("%s/outdir_%s/Plots"%(swd__,opt.ext)): os.system("mkdir %s/outdir_%s/Plots"%(swd__,opt.ext))
+plotSignalModel(hists,opt,_outdir="%s/outdir_%s/Plots"%(swd__,opt.ext))
