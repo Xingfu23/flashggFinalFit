@@ -90,7 +90,8 @@ for year in years:
     # Mapping to STXS definition here
     _procOriginal = proc
     _proc = "%s_%s_%s"%(procToDatacardName(proc),year,decayMode)
-    _proc_s0 = procToData(proc)
+    # _proc_s0 = procToData(proc)
+    _proc_s0 = procToData(proc.split("_")[0])
 
     # Define category: add year tag if not merging
     if opt.mergeYears: _cat = opt.cat
@@ -207,11 +208,12 @@ for ir,r in data[data['type']=='sig'].iterrows():
 
   print " --> Extracting yields: (%s,%s) [%.3f/%.3f = %.1f%%]"%(r['proc'],r['cat'],float(ir),totalSignalRows,100*(float(ir+1)/totalSignalRows))
 
-  # Open input WS file and extract workspace
+  # Open input WS file and extract workspace'
   f_in = ROOT.TFile(r.inputWSFile)
   inputWS = f_in.Get(inputWSName__)
   # Extract nominal RooDataSet and yield
   rdata_nominal = inputWS.data(r.nominalDataName)
+  print "rdata_nominal entry numebr = ", rdata_nominal.numEntries()
 
   # Calculate nominal yield, sumw2 and add COW correction for in acceptance events
   contents = ""
