@@ -28,6 +28,29 @@ globalXSBRMap['example']['THQ'] = {'mode':'tHq'}
 globalXSBRMap['example']['THW'] = {'mode':'tHW'}
 # ...
 
+# STXS stage 0 bins analysis: add factor for bin composition
+globalXSBRMap['stage0'] = od()
+globalXSBRMap['stage0']['decay'] = {'mode':'hgg'}
+globalXSBRMap['stage0']['GG2H'] = {'mode':'ggH'}
+globalXSBRMap['stage0']['VBF'] = {'mode':'qqH'}
+globalXSBRMap['stage0']['WH2HQQ'] = {'mode':'WH','factor':BR_W_qq}
+globalXSBRMap['stage0']['ZH2HQQ'] = {'mode':'qqZH','factor':BR_Z_qq}
+globalXSBRMap['stage0']['QQ2HLNU'] = {'mode':'WH','factor':BR_W_lnu}
+globalXSBRMap['stage0']['QQ2HLL'] = {'mode':'qqZH','factor':(BR_Z_ll+BR_Z_nunu)}
+globalXSBRMap['stage0']['GG2HQQ'] = {'mode':'ggZH','factor':BR_Z_qq}
+globalXSBRMap['stage0']['GG2HLL'] = {'mode':'ggZH','factor':BR_Z_ll}
+globalXSBRMap['stage0']['GG2HNUNU'] = {'mode':'ggZH','factor':BR_Z_nunu}
+globalXSBRMap['stage0']['TTH'] = {'mode':'ttH'}
+globalXSBRMap['stage0']['BBH'] = {'mode':'bbH'}
+globalXSBRMap['stage0']['THQ'] = {'mode':'tHq'}
+globalXSBRMap['stage0']['THW'] = {'mode':'tHW'}
+globalXSBRMap['stage0']['zh_ALT0M'] = {'mode':'qqZH'}
+globalXSBRMap['stage0']['ZH'] = {'mode':'qqZH'}
+globalXSBRMap['stage0']['zh'] = {'mode':'qqZH'}
+globalXSBRMap['stage0']['wh_ALT0M'] = {'mode':'WH'}
+globalXSBRMap['stage0']['WH'] = {'mode':'WH'}
+globalXSBRMap['stage0']['wh'] = {'mode':'WH'}
+
 # STXS analysis: add factor for bin composition
 globalXSBRMap['STXS'] = od()
 globalXSBRMap['STXS']['decay'] = {'mode':'hgg'}

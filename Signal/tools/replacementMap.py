@@ -9,8 +9,10 @@ globalReplacementMap['example'] = od()
 # For WRONG VERTEX SCENARIO:
 #  * single proc x cat for wrong vertex since for dZ > 1cm shape independent of proc x cat
 #  * use proc x cat with highest number of WV events
-globalReplacementMap['example']['procWV'] = "GG2H"
-globalReplacementMap['example']['catWV'] = "Untagged_Tag0"
+# globalReplacementMap['example']['procWV'] = "GG2H"
+# globalReplacementMap['example']['catWV'] = "Untagged_Tag0"
+globalReplacementMap['example']['procWV'] = "QQ2HLL"
+globalReplacementMap['example']['catWV'] = "RECO_VH_MET_Tag4"
 # For RIGHT VERTEX SCENARIO:
 #  * default you should add is diagonal process from given category 
 #  * if few events in diagonal process then may need to change the category aswell (see catRVMap)
@@ -22,6 +24,38 @@ globalReplacementMap["example"]["procRVMap"]["VBF_Tag0"] = "VBF"
 globalReplacementMap["example"]["catRVMap"] = od()
 globalReplacementMap["example"]["catRVMap"]["Untagged_Tag0"] = "Untagged_Tag0"
 globalReplacementMap["example"]["catRVMap"]["VBF_Tag0"] = "VBF_Tag0"
+
+# Stage 0 analysis
+globalReplacementMap['stage0'] = od()
+# For WRONG VERTEX SCENARIO:
+#  * single proc x cat for wrong vertex since for dZ > 1cm shape independent of proc x cat
+#  * use proc x cat with highest number of WV events
+# globalReplacementMap['stage0']['procWV'] = "GG2H"
+# globalReplacementMap['stage0']['catWV'] = "Untagged_Tag0"
+globalReplacementMap['stage0']['procWV'] = "QQ2HLL"
+globalReplacementMap['stage0']['catWV'] = "RECO_VH_MET_Tag3"
+# For RIGHT VERTEX SCENARIO:
+#  * default you should add is diagonal process from given category 
+#  * if few events in diagonal process then may need to change the category aswell (see catRVMap)
+#  * map must contain entry for all cats being processed (for replacement proc and cat)
+globalReplacementMap['stage0']['procRVMap'] = od()
+# globalReplacementMap["stage0"]["procRVMap"]["Untagged_Tag0"] = "GG2H"
+# globalReplacementMap["stage0"]["procRVMap"]["VBF_Tag0"] = "VBF"
+globalReplacementMap["stage0"]["procRVMap"]["RECO_VH_MET_Tag0"] = "zh_ALT_0M"
+globalReplacementMap["stage0"]["procRVMap"]["RECO_VH_MET_Tag1"] = "zh_ALT_0M"
+globalReplacementMap["stage0"]["procRVMap"]["RECO_VH_MET_Tag2"] = "zh_ALT_0M"
+globalReplacementMap["stage0"]["procRVMap"]["RECO_VH_MET_Tag3"] = "zh_ALT_0M"
+globalReplacementMap["stage0"]["procRVMap"]["RECO_VH_MET_Tag4"] = "zh_ALT_0M"
+# Replacement category for RV fit
+globalReplacementMap["stage0"]["catRVMap"] = od()
+# globalReplacementMap["stage0"]["catRVMap"]["Untagged_Tag0"] = "Untagged_Tag0"
+# globalReplacementMap["stage0"]["catRVMap"]["VBF_Tag0"] = "VBF_Tag0"
+globalReplacementMap["stage0"]["catRVMap"]["RECO_VH_MET_Tag0"] = "RECO_VH_MET_Tag0"
+globalReplacementMap["stage0"]["catRVMap"]["RECO_VH_MET_Tag1"] = "RECO_VH_MET_Tag1"
+globalReplacementMap["stage0"]["catRVMap"]["RECO_VH_MET_Tag2"] = "RECO_VH_MET_Tag2"
+globalReplacementMap["stage0"]["catRVMap"]["RECO_VH_MET_Tag3"] = "RECO_VH_MET_Tag3"
+globalReplacementMap["stage0"]["catRVMap"]["RECO_VH_MET_Tag4"] = "RECO_VH_MET_Tag4"
+
 
 
 # STXS analysis
@@ -215,8 +249,9 @@ globalReplacementMap['AC'] = od()
 # For WRONG VERTEX SCENARIO:
 #  * single proc x cat for wrong vertex since for dZ > 1cm shape independent of proc x cat
 #  * use proc x cat with highest number of WV events
-globalReplacementMap['AC']['procWV'] = "GG2H"
-globalReplacementMap['AC']['catWV'] = "RECO_0J_PTH_GT10_Tag1"
+# globalReplacementMap['AC']['procWV'] = "GG2H"
+# globalReplacementMap['AC']['catWV'] = "RECO_0J_PTH_GT10_Tag1"
+
 # For RIGHT VERTEX SCENARIO:
 #  * default mapping is to use diagonal process from given category 
 #  * if few events in diagonal process then may need to change the category aswell (see catRVMap)
@@ -287,9 +322,11 @@ globalReplacementMap["AC"]["procRVMap"]["RECO_VBFTOPO_ACVBFBSM_Tag1"] = "VBF"
 globalReplacementMap["AC"]["procRVMap"]["RECO_VBFTOPO_ACVBFSM_Tag0"] = "VBF"
 globalReplacementMap["AC"]["procRVMap"]["RECO_VBFTOPO_VHHAD_Tag0"] = "WPLUSH2HQQ"
 globalReplacementMap["AC"]["procRVMap"]["RECO_VBFTOPO_VHHAD_Tag1"] = "WPLUSH2HQQ"
-globalReplacementMap["AC"]["procRVMap"]["RECO_VH_MET_Tag0"] = "WPLUSH2HQQ"
-globalReplacementMap["AC"]["procRVMap"]["RECO_VH_MET_Tag1"] = "WPLUSH2HQQ"
-globalReplacementMap["AC"]["procRVMap"]["RECO_VH_MET_Tag2"] = "WPLUSH2HQQ"
+globalReplacementMap["AC"]["procRVMap"]["RECO_VH_MET_Tag0"] = "QQ2HLL"
+globalReplacementMap["AC"]["procRVMap"]["RECO_VH_MET_Tag1"] = "QQ2HLL"
+globalReplacementMap["AC"]["procRVMap"]["RECO_VH_MET_Tag2"] = "QQ2HLL"
+globalReplacementMap["AC"]["procRVMap"]["RECO_VH_MET_Tag3"] = "QQ2HLL"
+globalReplacementMap["AC"]["procRVMap"]["RECO_VH_MET_Tag4"] = "QQ2HLL"
 globalReplacementMap["AC"]["procRVMap"]["RECO_WH_LEP_PTV_0_75_Tag0"] = "WPLUSH2HQQ"
 globalReplacementMap["AC"]["procRVMap"]["RECO_WH_LEP_PTV_0_75_Tag1"] = "WPLUSH2HQQ"
 globalReplacementMap["AC"]["procRVMap"]["RECO_WH_LEP_PTV_75_150_Tag0"] = "WPLUSH2HQQ"
@@ -372,6 +409,8 @@ globalReplacementMap["AC"]["catRVMap"]["RECO_VBFTOPO_VHHAD_Tag1"] = "RECO_VBFTOP
 globalReplacementMap["AC"]["catRVMap"]["RECO_VH_MET_Tag0"] = "RECO_VH_MET_Tag0"
 globalReplacementMap["AC"]["catRVMap"]["RECO_VH_MET_Tag1"] = "RECO_VH_MET_Tag1"
 globalReplacementMap["AC"]["catRVMap"]["RECO_VH_MET_Tag2"] = "RECO_VH_MET_Tag2"
+globalReplacementMap["AC"]["catRVMap"]["RECO_VH_MET_Tag3"] = "RECO_VH_MET_Tag3"
+globalReplacementMap["AC"]["catRVMap"]["RECO_VH_MET_Tag4"] = "RECO_VH_MET_Tag4"
 globalReplacementMap["AC"]["catRVMap"]["RECO_WH_LEP_PTV_0_75_Tag0"] = "RECO_WH_LEP_PTV_0_75_Tag0"
 globalReplacementMap["AC"]["catRVMap"]["RECO_WH_LEP_PTV_0_75_Tag1"] = "RECO_WH_LEP_PTV_0_75_Tag1"
 globalReplacementMap["AC"]["catRVMap"]["RECO_WH_LEP_PTV_75_150_Tag0"] = "RECO_WH_LEP_PTV_75_150_Tag0"
